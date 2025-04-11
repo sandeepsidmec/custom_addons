@@ -7,8 +7,17 @@
             <form string="patient">
                 <sheet>
                     <group>
-                        <field name="patient_name"/>
-                        <field name="age"/>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="age"/>
+                            <field name="gender"/>
+                        </group>
+                        <group>
+                            <field name="is_patient_in_ward"/>
+                            <field name="admit_date" invisible="is_patient_in_ward == False"/>
+                            <field name="discharge_date" invisible="is_patient_in_ward == False"/>
+                            <field name="patient_names" widget="many2many_tags"/>
+                        </group>
                     </group>
                 </sheet>
                 <chatter/>
@@ -20,7 +29,7 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <list string="patient">
-                <field name="patient_name"/>
+                <field name="patient_id"/>
                 <field name="age"/>
             </list>
         </field>
