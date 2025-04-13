@@ -10,7 +10,7 @@
                     <group>
                     <field name="name"/>
                     <field name="age"/>
-                    <field name="dob"/>
+                    <field name="experience"/>
                     <field name="gender"/>
                     </group>
                     <group>
@@ -29,7 +29,7 @@
             <list string="teacher">
                 <field name="name"/>
                 <field name="age"/>
-                <field name="dob"/>
+                <field name="experience"/>
                 <field name="gender"/>
                 <field name="subject"/>
             </list>

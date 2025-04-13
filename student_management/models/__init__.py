@@ -1,2 +1,2 @@
 from . import student
-from . import Teacher
+from . import Teacher,purchase

@@ -16,7 +16,7 @@
                             <field name="is_patient_in_ward"/>
                             <field name="admit_date" invisible="is_patient_in_ward == False"/>
                             <field name="discharge_date" invisible="is_patient_in_ward == False"/>
-                            <field name="patient_names" widget="many2many_tags"/>
+                            <field name="doctor_names" widget="many2many_tags"/>
                         </group>
                     </group>
                 </sheet>
@@ -31,6 +31,10 @@
             <list string="patient">
                 <field name="patient_id"/>
                 <field name="age"/>
+                <field name="gender"/>
+                <field name="admit_date"/>
+                <field name="discharge_date"/>
+                <field name="doctor_names"/>
             </list>
         </field>
     </record>

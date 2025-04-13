@@ -12,6 +12,4 @@ class HospitalPatient(models.Model):
     is_patient_in_ward = fields.Boolean("is patient in ward")
     admit_date = fields.Date("Admit date")
     discharge_date = fields.Date("discharge Date")
-
-    patient_names = fields.Many2many(comodel_name="res.partner", string="Names")
-
+    doctor_names = fields.Many2many(comodel_name="hospital.doctor", string="Doctors")

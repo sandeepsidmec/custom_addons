@@ -9,13 +9,19 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="name"/>
+                            <field name="student_id"/>
                             <field name="age"/>
                             <field name="dob"/>
+                            <field name="is_student_new"/>
+                            <field name="allotment_date" invisible="is_student_new == False"/>
+                            <field name="joining_date" invisible="is_student_new == False"/>
                         </group>
                         <group>
                             <field name="gender"/>
-                            <field name="Address"/>
+                            <field name="address"/>
+                            <field name="student_names" widget="many2many_tags"/>
+                            <field name="teacher_id"/>
+
                         </group>
                     </group>
                 </sheet>
@@ -29,13 +35,15 @@
         <field name="model">college.student</field>
         <field name="arch" type="xml">
             <list string="student">
-                <field name="name"/>
+                <field name="student_id"/>
                 <field name="age"/>
                 <field name="dob"/>
                 <field name="gender"/>
+                <field name="teacher_id"/>
             </list>
         </field>
     </record>
+
     <!---Action_Menu-->
     <record id="action_college_student" model="ir.actions.act_window">
         <field name="name">student</field>
