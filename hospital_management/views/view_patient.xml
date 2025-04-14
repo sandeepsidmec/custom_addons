@@ -9,6 +9,7 @@
                     <group>
                         <group>
                             <field name="patient_id"/>
+                            <field name="email"/>
                             <field name="age"/>
                             <field name="gender"/>
                         </group>
@@ -19,6 +20,28 @@
                             <field name="doctor_names" widget="many2many_tags"/>
                         </group>
                     </group>
+                    <notebook>
+                        <page string="order lines">
+                            <field name="patient_lines">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="qty"/>
+                                    <field name="unit_price"/>
+                                </list>
+                                <form>
+                                    <field name="product_id"/>
+                                    <field name="qty"/>
+                                    <field name="unit_price"/>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="other information">
+                            <group>
+                                <field name="user_id"/>
+                                <field name="company_id"/>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
                 <chatter/>
             </form>
