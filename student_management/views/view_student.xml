@@ -10,6 +10,7 @@
                     <group>
                         <group>
                             <field name="student_id"/>
+                            <field name="email"/>
                             <field name="age"/>
                             <field name="dob"/>
                             <field name="is_student_new"/>
@@ -17,13 +18,53 @@
                             <field name="joining_date" invisible="is_student_new == False"/>
                         </group>
                         <group>
+                            <field name="mobile"/>
                             <field name="gender"/>
                             <field name="address"/>
                             <field name="student_names" widget="many2many_tags"/>
                             <field name="teacher_id"/>
-
                         </group>
                     </group>
+                    <notebook>
+                        <page string="order lines">
+                            <field name="student_lines">
+                                <list editable="bottom">
+                                    <field name="book_id"/>
+                                    <field name="qty"/>
+                                    <field name="unit_price"/>
+                                    <field name="sub_total"/>
+                                </list>
+                                <form>
+                                    <field name="book_id"/>
+                                    <field name="qty"/>
+                                    <field name="unit_price"/>
+                                    <field name="sub_total"/>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Optional Products">
+                            <field name="student_options">
+                                <list editable="bottom">
+                                    <field name="book_id"/>
+                                    <field name="qty"/>
+                                    <field name="unit_price"/>
+                                    <field name="sub_total"/>
+                                </list>
+                                <form>
+                                    <field name="book_id"/>
+                                    <field name="qty"/>
+                                    <field name="unit_price"/>
+                                    <field name="sub_total"/>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="other information">
+                            <group>
+                                <field name="user_id"/>
+                                <field name="company_id"/>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
                 <chatter/>
             </form>
