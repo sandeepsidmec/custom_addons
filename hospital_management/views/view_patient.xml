@@ -5,7 +5,18 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <form string="patient">
+                <header>
+                    <button name="send_email" string="Send mail" type="object" class="btn-primary"/>
+                    <field name="status" widget="statusbar" statusbar_visible="admit,discharge"/>
+                </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button"
+                                name="view_patient_lines"
+                                type="object"
+                                icon="fa-pencil-square-o"
+                                string="patient"/>
+                    </div>
                     <group>
                         <group>
                             <field name="patient_id"/>
@@ -27,11 +38,13 @@
                                     <field name="product_id"/>
                                     <field name="qty"/>
                                     <field name="unit_price"/>
+                                    <!--                                    <field name="subtotal"/>-->
                                 </list>
                                 <form>
                                     <field name="product_id"/>
                                     <field name="qty"/>
                                     <field name="unit_price"/>
+                                    <!--                                    <field name="subtotal"/>-->
                                 </form>
                             </field>
                         </page>
