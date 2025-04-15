@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_student_lines_list" model="ir.ui.view">
+        <field name="name">student lines</field>
+        <field name="model">college.student.line</field>
+        <field name="arch" type="xml">
+            <list string="student joining">
+                <field name="book_id"/>
+                <field name="qty"/>
+                <field name="unit_price"/>
+<!--                <field name="subtotal"/>-->
+                <field name="student"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_college_student_lines" model="ir.actions.act_window">
+        <field name="name">student lines</field>
+        <field name="res_model">college.student.line</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_student_lines_list"/>
+    </record>
+</odoo>

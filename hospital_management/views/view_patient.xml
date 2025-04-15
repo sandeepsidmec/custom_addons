@@ -60,6 +60,7 @@
             </form>
         </field>
     </record>
+
     <record id="view_patient_list" model="ir.ui.view">
         <field name="name">patient</field>
         <field name="model">hospital.patient</field>

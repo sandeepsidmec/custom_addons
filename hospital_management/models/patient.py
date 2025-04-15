@@ -45,14 +45,13 @@ class HospitalPatient(models.Model):
 
     def view_patient_lines(self):
         self.ensure_one()
-        for rec in self:
-            return {
-                'name': "view patient invoices",
-                'view_mode': 'list',
-                'res_model': 'hospital.patient.line',
-                'domain': [('patient', '=', rec.patient_id.id)],
-                'type': 'ir.actions.act_window',
-            }
+        return {
+            'name': "view patient invoices",
+            'view_mode': 'list',
+            'res_model': 'hospital.patient.line',
+            'domain': [('patient', '=', self.id)],
+            'type': 'ir.actions.act_window',
+        }
 
 
 class HospitalPatientLines(models.Model):

@@ -29,6 +29,8 @@ class CollegeStudent(models.Model):
     user_id = fields.Many2one("res.users", "user", compute="compute_user_company")
     company_id = fields.Many2one("res.company", "Company", compute="compute_user_company")
 
+    status = fields.Selection([("alloted", "Alloted"), ("joined", "Joined")], "status", default='alloted')
+
 
     # onchange method
     # @api.onchange("student_id")
@@ -46,6 +48,21 @@ class CollegeStudent(models.Model):
         for rec in self:
             rec.user_id = self.env.user
             rec.company_id = self.env.user.company_id.id
+
+    def send_email(self):
+        for rec in self:
+            template = self.env.ref("student_management.mail_template_student_confirm")
+            template.send_mail(rec.id, force_send=True)
+    #         SMART Button
+    def view_student_lines(self):
+        self.ensure_one()
+        return {
+            'name': "view student joining",
+            'view_mode': 'list',
+            'res_model': 'college.student.line',
+            'domain': [('student', '=', self.id)],
+            'type': 'ir.actions.act_window',
+        }
 
 
 class collegeStudentLines(models.Model):

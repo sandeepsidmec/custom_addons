@@ -6,7 +6,18 @@
         <field name="model">college.student</field>
         <field name="arch" type="xml">
             <form string="student">
+                <header>
+                    <button name="send_email" string="Send mail" type="object" class="btn-primary"/>
+                    <field name="status" widget="statusbar" statusbar_visible="alloted,joined"/>
+                </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button"
+                                name="view_student_lines"
+                                type="object"
+                                icon="fa-pencil-square-o"
+                                string="student"/>
+                    </div>
                     <group>
                         <group>
                             <field name="student_id"/>
