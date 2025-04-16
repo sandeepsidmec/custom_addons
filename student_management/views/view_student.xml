@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
+    <odoo>
     <!---Student Form-->
     <record id="view_student_form" model="ir.ui.view">
         <field name="name">student</field>
@@ -18,6 +18,7 @@
                                 icon="fa-pencil-square-o"
                                 string="student"/>
                     </div>
+                     <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
                     <group>
                         <group>
                             <field name="student_id"/>
@@ -95,12 +96,80 @@
             </list>
         </field>
     </record>
+<!--    kanban view      -->
+     <record id="view_student_kanban" model="ir.ui.view">
+        <field name="name">student</field>
+        <field name="model">college.student</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="student_id"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="allotment_date"/>
+                <field name="joining_date"/>
+                <field name="email"/>
+
+                <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click">
+                        <strong><field name="student_id"/></strong><br/>
+                        age: <field name="age"/><br/>
+                        Gender: <field name="gender"/><br/>
+
+                    </div>
+                </t>
+            </templates>
+            </kanban>
+        </field>
+    </record>
+<!--    graph view     -->
+    <record id="view_student_graph" model="ir.ui.view">
+        <field name="name">student</field>
+        <field name="model">college.student</field>
+        <field name="arch" type="xml">
+            <graph string="student">
+                <field name="student_id"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="allotment_date"/>
+                <field name="joining_date"/>
+            </graph>
+        </field>
+    </record>
+<!--    pivot view    -->
+     <record id="view_student_pivot" model="ir.ui.view">
+        <field name="name">student</field>
+        <field name="model">college.student</field>
+        <field name="arch" type="xml">
+            <pivot string="student">
+                <field name="student_id"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="allotment_date"/>
+                <field name="joining_date"/>
+            </pivot>
+        </field>
+    </record>
+     <record id="view_student_search_bar" model="ir.ui.view">
+        <field name="name">student</field>
+        <field name="model">college.student</field>
+        <field name="arch" type="xml">
+            <search string="student">
+                <field name="student_id"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="allotment_date"/>
+                <field name="joining_date"/>
+                <filter name="filter_name" string="age" domain="[('age','>','23')]"/>
+            </search>
+        </field>
+    </record>
 
     <!---Action_Menu-->
     <record id="action_college_student" model="ir.actions.act_window">
         <field name="name">student</field>
         <field name="res_model">college.student</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,form,kanban,graph,pivot</field>
         <field name="view_id" ref="view_student_list"/>
     </record>
 

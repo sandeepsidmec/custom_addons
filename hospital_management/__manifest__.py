@@ -12,5 +12,8 @@
             "views/view_doctor.xml",
             "views/view_sale_order.xml",
             "data/patient_confirm_mail.xml",
+            "wizard/patient_wizard_invoices.xml",
+            "report/report_patient_template.xml",
+            "report/report.xml",
             "views/menu.xml", ],
 }

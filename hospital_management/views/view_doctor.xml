@@ -33,4 +33,5 @@
         <field name="view_id" ref="view_doctor_list"/>
     </record>
 
+
 </odoo>

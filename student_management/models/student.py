@@ -1,4 +1,5 @@
 from odoo import models, fields,api
+from datetime import date
 
 
 class CollegeStudent(models.Model):
@@ -29,7 +30,8 @@ class CollegeStudent(models.Model):
     user_id = fields.Many2one("res.users", "user", compute="compute_user_company")
     company_id = fields.Many2one("res.company", "Company", compute="compute_user_company")
 
-    status = fields.Selection([("alloted", "Alloted"), ("joined", "Joined")], "status", default='alloted')
+    status = fields.Selection([("alloted", "Alloted"), ("joined", "Joined")], "status", default='alloted', compute="student_joining")
+    image_1920 = fields.Binary("image")
 
 
     # onchange method
@@ -49,10 +51,12 @@ class CollegeStudent(models.Model):
             rec.user_id = self.env.user
             rec.company_id = self.env.user.company_id.id
 
+    # add send email in header
     def send_email(self):
         for rec in self:
             template = self.env.ref("student_management.mail_template_student_confirm")
             template.send_mail(rec.id, force_send=True)
+
     #         SMART Button
     def view_student_lines(self):
         self.ensure_one()
@@ -63,6 +67,15 @@ class CollegeStudent(models.Model):
             'domain': [('student', '=', self.id)],
             'type': 'ir.actions.act_window',
         }
+
+    def student_joining(self):
+        today = date.today()
+        for i in self:
+            if i.joining_date and today > i.joining_date:
+                i.status = "joined"
+            else:
+                i.status = "alloted"
+
 
 
 class collegeStudentLines(models.Model):

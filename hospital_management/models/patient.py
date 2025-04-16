@@ -1,4 +1,5 @@
 from odoo import models, fields
+from datetime import date
 
 
 class HospitalPatient(models.Model):
@@ -21,7 +22,9 @@ class HospitalPatient(models.Model):
     user_id = fields.Many2one("res.users", "user", compute="compute_user_company")
     company_id = fields.Many2one("res.company", "Company", compute="compute_user_company")
 
-    status = fields.Selection([("admit", "Admitted"), ("discharge", "Discharged")], "status", default='admit')
+    status = fields.Selection([("admit", "Admitted"), ("discharge", "Discharged")], "status", default='admit',compute="status_date")
+    image_1920 = fields.Binary("image")
+
 
     # @api.onchange("patient_id")
     # def onchange_patient_name(self):
@@ -53,6 +56,13 @@ class HospitalPatient(models.Model):
             'type': 'ir.actions.act_window',
         }
 
+    def status_date(self):
+        today=date.today()
+        for i in self:
+            if today > i.discharge_date:
+                i.status='discharge'
+            else:
+                i.status='admit'
 
 class HospitalPatientLines(models.Model):
     _name = "hospital.patient.line"

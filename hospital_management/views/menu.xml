@@ -4,6 +4,10 @@
     <menuitem id="menu_hospital_patient" name="patient" action="action_hospital_patient" parent="menu_hospital"
               sequence="20"/>
     <menuitem id="menu_hospital_doctor" name="doctor" action="action_hospital_doctor" parent="menu_hospital"
-              sequence="10"/>
+              sequence="30"/>
+    <menuitem id="menu_reporting" name="Reporting" parent="menu_hospital"
+              sequence="40"/>
+    <menuitem id="menu_patient_report" name="Patient pdf Report" parent="menu_reporting"
+              sequence="10" action="action_hospital_patient_wizard"/>
 
 </odoo>
