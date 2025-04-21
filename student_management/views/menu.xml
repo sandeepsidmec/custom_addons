@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <menuitem id="menu_students" name="SMS"/>
-    <menuitem id="menu_college_student" name="student" action="action_college_student" parent="menu_students"/>
+    <menuitem id="menu_college_student" name="student" action="action_college_student" parent="menu_students" groups="student_management.group_student"/>
     <menuitem id="menu_college_student_readonly" name="view_student" action="action_college_student_readonly" parent="menu_college_student"/>
     <menuitem id="menu_college_teacher" name="Teacher" action="action_college_teacher" parent="menu_students"/>
      <menuitem id="menu_reporting" name="Reporting" parent="menu_students"/>

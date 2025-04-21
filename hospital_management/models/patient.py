@@ -1,3 +1,5 @@
+from email.policy import default
+
 from odoo import models, fields
 from datetime import date
 
@@ -9,8 +11,10 @@ class HospitalPatient(models.Model):
     _rec_name = "patient_id"
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    name = fields.Char("patient sequence", default="New")
     patient_id = fields.Many2one(comodel_name="res.partner", domain=[("email", "!=", False)], string="Name",
                                  tracking=True, required=True)
+
     email = fields.Char(related="patient_id.email", string="email")
     age = fields.Integer(string="Age")
     gender = fields.Selection([("male", "Male"), ("female", "Female")], "Gender")
@@ -47,24 +51,27 @@ class HospitalPatient(models.Model):
     def create(self, vals):
         vals["user_id"] = self.env.user.id
         vals["company_id"] = self.env.user.company_id.id
+        vals["name"] = self.env['ir.sequence'].next_by_code('hospital.patient')
         return super(HospitalPatient, self).create(vals)
+
+    # def compute_name(self):
+    #     for rec in self:
+    #         rec.name = self.env['ir.sequence'].next_by_code('hospital.patient')
 
     """
     
     patient=-self.env["hospital.patient"].search([('id','=',self.id)})
-    if patient:
-    
-    
-    
-    
-    vals={
-        "user_id": self.env.user.id,
-        "company_id": self.env.user.company_id.id
-    }
-    
-    self.env["hospital.patient"].create(vals)
-    
     """
+
+    """
+       vals={
+           "user_id": self.env.user.id,
+           "company_id": self.env.user.company_id.id
+       }
+       
+       self.env["hospital.patient"].create(vals)
+       
+       """
 
     def send_email(self):
         for rec in self:

@@ -1,4 +1,4 @@
-from odoo import models, fields,api
+from odoo import models, fields, api
 from datetime import date
 
 
@@ -8,7 +8,8 @@ class CollegeStudent(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = "student_id"
 
-    student_id = fields.Many2one(comodel_name="res.partner", domain=[("email", "!=", False)],string="Name", tracking=True, required=True)
+    student_id = fields.Many2one(comodel_name="res.partner", domain=[("email", "!=", False)], string="Name",
+                                 tracking=True, required=True)
     email = fields.Char(related="student_id.email", string="email")
     mobile = fields.Char(related="student_id.mobile", string="Mobile")
     age = fields.Integer(string="Age")
@@ -30,9 +31,9 @@ class CollegeStudent(models.Model):
     user_id = fields.Many2one("res.users", "user", compute="compute_user_company")
     company_id = fields.Many2one("res.company", "Company", compute="compute_user_company")
     # status bar
-    status = fields.Selection([("alloted", "Alloted"), ("joined", "Joined")], "status", default='alloted', compute="student_joining")
+    status = fields.Selection([("alloted", "Alloted"), ("joined", "Joined")], "status", default='alloted',
+                              compute="student_joining")
     image_1920 = fields.Binary("image")
-
 
     # onchange method
     # @api.onchange("student_id")
@@ -67,6 +68,7 @@ class CollegeStudent(models.Model):
             'domain': [('student', '=', self.id)],
             'type': 'ir.actions.act_window',
         }
+
     # status bar automatic action add field in header
     def student_joining(self):
         today = date.today()
@@ -75,7 +77,6 @@ class CollegeStudent(models.Model):
                 i.status = "joined"
             else:
                 i.status = "alloted"
-
 
 
 class collegeStudentLines(models.Model):
@@ -94,6 +95,7 @@ class collegeStudentLines(models.Model):
     def subtotal(self):
         for i in self:
             i.sub_total = i.qty * i.unit_price
+
 
 class collegeStudentOption(models.Model):
     _name = "college.student.option"
