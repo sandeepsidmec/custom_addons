@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_student_report_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="student">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <img t-if="student.image_1920"
+                             t-att-src="image_data_uri(student.image_1920)"
+                             style="max-height: 70px;" alt="Logo"/>
+                        <h3>Order Details</h3>
+                        <table style="border-collapse: collapse; width: 100%;">
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 10px; vertical-align: top;">
+                                    <strong>Student Name:</strong>
+                                    <br/>
+                                    <span t-field="student.student_id"/>
+                                </td>
+                                <td style="border: 1px solid #ccc; padding: 10px; vertical-align: top;">
+                                    <strong>Email:</strong>
+                                    <br/>
+                                    <span t-field="student.student_id.email"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 10px; vertical-align: top;">
+                                    <strong>Date of Birth:</strong>
+                                    <br/>
+                                    <span t-field="student.dob"/>
+                                </td>
+                                <td style="border: 1px solid #ccc; padding: 10px; vertical-align: top;">
+                                    <strong>Address:</strong>
+                                    <br/>
+                                    <span t-field="student.address"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <strong style="color:blue; font-size:20px;">Student ID:
+                            <span t-field="student.student_id.id"/>
+                        </strong>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td style="width: 50%; padding: 10px; vertical-align: top;">
+                                    <strong>Allotment_Date:</strong>
+                                    <br/>
+                                    <span t-field="student.allotment_date"/>
+                                </td>
+                                <td style="width: 50%; padding: 10px; vertical-align: top;">
+                                    <strong>Joining Date:</strong>
+                                    <br/>
+                                    <span t-field="student.joining_date"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <h3>Order Lines</h3>
+                        <table style="border-collapse: collapse; width: 100%;">
+                            <tr>
+                                <th name="th_description" class="text-start">
+                                    <span t-att-class="'fw-bold'">Description</span>
+                                </th>
+                                <th name="th_quantity">
+                                    <span t-att-class="'fw-bold'">Quantity</span>
+                                </th>
+                                <th name="th_priceunit">
+                                    <span t-att-class="'fw-bold'">Unit Price</span>
+                                </th>
+                                <th name="th_subtotal">
+                                    <span t-att-class="'fw-bold'">subtotal</span>
+                                </th>
+                            </tr>
+                            <!--                                <t t-set="current_subtotal" t-value="0"/>-->
+                            <t t-foreach="student.student_lines" t-as="line">
+                                <tr>
+                                    <td style="border: 1px solid #ccc; padding: 10px; vertical-align: top;">
+                                        <span t-field="line.book_id.name"/>
+                                    </td>
+                                    <td style="border: 1px solid #ccc; padding: 10px; vertical-align: top;">
+                                        <span t-esc="line.qty"/>
+                                    </td>
+                                    <td style="border: 1px solid #ccc; padding: 10px; vertical-align: top;">
+                                        <span t-esc="line.unit_price"/>
+                                    </td>
+                                    <td style="border: 1px solid #ccc; padding: 10px; vertical-align: top;">
+                                        <span t-esc="line.sub_total"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tfoot>
+                                <tr>
+                                    <td t-att-class="'fw-bold'"
+                                        style="border: 1px solid #ccc; padding: 10px; vertical-align: top; text-align: right;"
+                                        colspan="3">
+                                        Total:
+                                    </td>
+                                    <td style="border: 1px solid #ccc; padding: 10px; vertical-align: top;">
+                                        <span t-esc="sum(line.sub_total for line in student.student_lines)"/>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
+
+

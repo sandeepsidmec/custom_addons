@@ -9,7 +9,7 @@ class CollegeStudent(models.Model):
     _rec_name = "student_id"
 
     student_id = fields.Many2one(comodel_name="res.partner", domain=[("email", "!=", False)],string="Name", tracking=True, required=True)
-    email = fields.Char(string="email")
+    email = fields.Char(related="student_id.email", string="email")
     mobile = fields.Char(related="student_id.mobile", string="Mobile")
     age = fields.Integer(string="Age")
     dob = fields.Date(string="Date of Birth")
@@ -29,7 +29,7 @@ class CollegeStudent(models.Model):
 
     user_id = fields.Many2one("res.users", "user", compute="compute_user_company")
     company_id = fields.Many2one("res.company", "Company", compute="compute_user_company")
-
+    # status bar
     status = fields.Selection([("alloted", "Alloted"), ("joined", "Joined")], "status", default='alloted', compute="student_joining")
     image_1920 = fields.Binary("image")
 
@@ -51,13 +51,13 @@ class CollegeStudent(models.Model):
             rec.user_id = self.env.user
             rec.company_id = self.env.user.company_id.id
 
-    # add send email in header
+    # add send email in header check student_confirm_mail and add button in header
     def send_email(self):
         for rec in self:
             template = self.env.ref("student_management.mail_template_student_confirm")
             template.send_mail(rec.id, force_send=True)
 
-    #         SMART Button
+    #         SMART Button and add button in xml file in sheet and add list view in view_student_lines.xml
     def view_student_lines(self):
         self.ensure_one()
         return {
@@ -67,11 +67,11 @@ class CollegeStudent(models.Model):
             'domain': [('student', '=', self.id)],
             'type': 'ir.actions.act_window',
         }
-
+    # status bar automatic action add field in header
     def student_joining(self):
         today = date.today()
         for i in self:
-            if i.joining_date and today > i.joining_date:
+            if i.joining_date and today > i.joining_date and i.allotment_date < i.joining_date:
                 i.status = "joined"
             else:
                 i.status = "alloted"

@@ -13,3 +13,4 @@ class CollegeTeacher(models.Model):
         ("male","Male")])
     Address = fields.Text(string="Address")
     subject = fields.Char(string="Subject")
+    teacher_email = fields.Char(string="Email")

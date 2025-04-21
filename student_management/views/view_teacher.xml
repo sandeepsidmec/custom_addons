@@ -16,6 +16,7 @@
                     <group>
                     <field name="Address"/>
                     <field name="subject"/>
+                    <field name="teacher_email"/>
                     </group>
                 </group>
             </form>

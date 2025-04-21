@@ -3,10 +3,12 @@
     <template id="report_patient_report_document">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="patient">
-                <t t-call="web.external_layout">
+                <t t-call="web.internal_layout">
                     <div class="page" style="">
                         <span t-field="patient.patient_id"/>
                         <span t-field="patient.patient_id.name"/>
+                        <span t-field="patient.doctor_name.experience"/><br/>
+<!--                        <span t-field="patient..experience"/><br/>-->
                     </div>
                 </t>
             </t>

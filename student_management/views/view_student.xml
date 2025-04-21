@@ -18,7 +18,7 @@
                                 icon="fa-pencil-square-o"
                                 string="student"/>
                     </div>
-                     <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
+                     <field name="image_1920" widget="image" class="oe_avatar" />
                     <group>
                         <group>
                             <field name="student_id"/>
@@ -92,7 +92,11 @@
                 <field name="age"/>
                 <field name="dob"/>
                 <field name="gender"/>
-                <field name="teacher_id"/>
+                <field name="teacher_id" optional="hide"/>
+                <field name="email" optional="hide"/>
+                <field name="address" optional="hide"/>
+                <field name="allotment_date" optional="hide"/>
+                <field name="joining_date" optional="hide"/>
             </list>
         </field>
     </record>
