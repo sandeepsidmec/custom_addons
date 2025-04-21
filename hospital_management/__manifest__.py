@@ -9,6 +9,7 @@
             "security/security.xml",
             "security/ir.model.access.csv",
             "views/view_patient.xml",
+            "data/ir_sequence.xml",
             "views/view_patient_lines.xml",
             "views/view_doctor.xml",
             "views/view_sale_order.xml",

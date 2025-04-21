@@ -4,6 +4,7 @@
     "depends": ["mail", "purchase", ],
     'data': [
         "security/ir.model.access.csv",
+        'security/security.xml',
         'views/view_student.xml',
         'views/view_student_readonly.xml',
         'views/view_teacher.xml',
