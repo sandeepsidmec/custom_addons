@@ -3,3 +3,4 @@ access_college_student,access_college_student,model_college_student,,1,1,1,1
 access_college_student_line,access_college_student_line,model_college_student_line,,1,1,1,1
 access_college_student_option,access_college_student_option,model_college_student_option,,1,1,1,1
 access_college_teacher,access_college_teacher,model_college_teacher,,1,1,1,1
+access_student_invoices_wizard,access_student_invoices_wizard,model_student_invoices_wizard,,1,1,1,1

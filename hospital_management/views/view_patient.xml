@@ -32,6 +32,7 @@
                             <field name="admit_date" invisible="is_patient_in_ward == False"/>
                             <field name="discharge_date" invisible="is_patient_in_ward == False"/>
                             <field name="doctor_names" widget="many2many_tags"/>
+                            <field name="doctor_name"/>
                         </group>
                     </group>
                     <notebook>
@@ -71,10 +72,12 @@
             <list string="patient">
                 <field name="patient_id"/>
                 <field name="age"/>
-                <field name="gender"/>
-                <field name="admit_date"/>
-                <field name="discharge_date"/>
-                <field name="doctor_names"/>
+                <field name="gender" optional="show"/>
+                <field name="admit_date" optional="hide"/>
+                <field name="discharge_date" optional="hide"/>
+                <field name="doctor_names" optional="hide"/>
+                <field name="date" optional="hide"/>
+                <field name="email" optional="hide"/>
             </list>
         </field>
     </record>

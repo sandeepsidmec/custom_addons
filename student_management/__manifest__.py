@@ -1,14 +1,18 @@
 {
-    "name":"Student Management System",
-    "author":"Sandeep",
-    "depends": ["mail","purchase", ],
-    'data':[
+    "name": "Student Management System",
+    "author": "Sandeep",
+    "depends": ["mail", "purchase", ],
+    'data': [
         "security/ir.model.access.csv",
-        "views/view_purchase.xml",
         'views/view_student.xml',
+        'views/view_student_readonly.xml',
         'views/view_teacher.xml',
         'views/view_student_lines.xml',
         'data/student_confirm_mail.xml',
+        'report/report.xml',
+        'report/report_student_template.xml',
+        'wizard/student_wizard_invoices.xml',
         'views/menu.xml',
-    ]
+    ],
+    'installable': True,
 }

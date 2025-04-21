@@ -8,7 +8,7 @@ class HospitalPatient(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     patient_id = fields.Many2one(comodel_name="res.partner", domain=[("email", "!=", False)], string="Name",
-                                 tracking=True, required=True, stored=True)
+                                 tracking=True, required=True)
     email = fields.Char(related="patient_id.email", string="email")
     age = fields.Integer(string="Age")
     gender = fields.Selection([("male", "Male"), ("female", "Female")], "Gender")
@@ -16,6 +16,7 @@ class HospitalPatient(models.Model):
     admit_date = fields.Date("Admit date")
     discharge_date = fields.Date("discharge Date")
     doctor_names = fields.Many2many(comodel_name="hospital.doctor", string="Doctors")
+    doctor_name = fields.Many2one(comodel_name="hospital.doctor", string="Doctor")
     date = fields.Date("Date")
     patient_lines = fields.One2many("hospital.patient.line", "patient", "Order lines")
 

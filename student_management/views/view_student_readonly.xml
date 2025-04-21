@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!---Student Form-->
+    <record id="view_student_form_readonly" model="ir.ui.view">
+        <field name="name">student readonly</field>
+        <field name="model">college.student</field>
+        <field name="arch" type="xml">
+            <form string="student" create="0" delete="0" edit="0">
+                <group>
+                    <group>
+                    <field name="student_id"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+                    </group>
+                    <group>
+                    <field name="address"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <!--Student list-->
+    <record id="view_student_list_readonly" model="ir.ui.view">
+        <field name="name">student readonly</field>
+        <field name="model">college.student</field>
+        <field name="arch" type="xml">
+            <list string="student" create="0" delete="0" edit="0">
+                <field name="student_id"/>
+                <field name="age"/>
+                <field name="gender"/>
+            </list>
+        </field>
+    </record>
+    <!---Action_Menu-->
+    <record id="action_college_student_readonly" model="ir.actions.act_window">
+        <field name="name">student readonly</field>
+        <field name="res_model">college.student</field>
+         <field name="view_ids" eval="[Command.clear(),
+            Command.create({'view_mode': 'list', 'sequence': 1, 'view_id': ref('view_student_list_readonly')}),
+            Command.create({'view_mode': 'form', 'sequence': 2, 'view_id': ref('view_student_form_readonly')}),
+        ]"/>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_student_list_readonly"/>
+    </record>
+
+</odoo>
