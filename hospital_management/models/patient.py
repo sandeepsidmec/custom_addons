@@ -1,6 +1,8 @@
 from odoo import models, fields
 from datetime import date
 
+from odoo.api import ValuesType, Self
+
 
 class HospitalPatient(models.Model):
     _name = "hospital.patient"
@@ -20,12 +22,12 @@ class HospitalPatient(models.Model):
     date = fields.Date("Date")
     patient_lines = fields.One2many("hospital.patient.line", "patient", "Order lines")
 
-    user_id = fields.Many2one("res.users", "user", compute="compute_user_company")
-    company_id = fields.Many2one("res.company", "Company", compute="compute_user_company")
+    user_id = fields.Many2one("res.users", "user")
+    company_id = fields.Many2one("res.company", "Company")
 
-    status = fields.Selection([("admit", "Admitted"), ("discharge", "Discharged")], "status", default='admit',compute="status_date")
+    status = fields.Selection([("admit", "Admitted"), ("discharge", "Discharged")], "status", default='admit',
+                              compute="status_date")
     image_1920 = fields.Binary("image")
-
 
     # @api.onchange("patient_id")
     # def onchange_patient_name(self):
@@ -37,10 +39,32 @@ class HospitalPatient(models.Model):
     #     for rec in self:
     #         rec.email = rec.patient_id.email
 
-    def compute_user_company(self):
-        for rec in self:
-            rec.user_id = self.env.user
-            rec.company_id = self.env.user.company_id.id
+    # def compute_user_company(self):
+    #     for rec in self:
+    #         rec.user_id = self.env.user
+    #         rec.company_id = self.env.user.company_id.id
+
+    def create(self, vals):
+        vals["user_id"] = self.env.user.id
+        vals["company_id"] = self.env.user.company_id.id
+        return super(HospitalPatient, self).create(vals)
+
+    """
+    
+    patient=-self.env["hospital.patient"].search([('id','=',self.id)})
+    if patient:
+    
+    
+    
+    
+    vals={
+        "user_id": self.env.user.id,
+        "company_id": self.env.user.company_id.id
+    }
+    
+    self.env["hospital.patient"].create(vals)
+    
+    """
 
     def send_email(self):
         for rec in self:
@@ -58,12 +82,13 @@ class HospitalPatient(models.Model):
         }
 
     def status_date(self):
-        today=date.today()
+        today = date.today()
         for i in self:
-            if today > i.discharge_date:
-                i.status='discharge'
+            if i.discharge_date and today > i.discharge_date:
+                i.status = 'discharge'
             else:
-                i.status='admit'
+                i.status = 'admit'
+
 
 class HospitalPatientLines(models.Model):
     _name = "hospital.patient.line"

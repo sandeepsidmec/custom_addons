@@ -2,7 +2,7 @@
 <odoo>
     <menuitem id="menu_hospital" name="HMS"/>
     <menuitem id="menu_hospital_patient" name="patient" action="action_hospital_patient" parent="menu_hospital"
-              sequence="20"/>
+              sequence="20" groups="hospital_management.group_patient"/>
     <menuitem id="menu_hospital_doctor" name="doctor" action="action_hospital_doctor" parent="menu_hospital"
               sequence="30"/>
     <menuitem id="menu_reporting" name="Reporting" parent="menu_hospital"
