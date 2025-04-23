@@ -3,6 +3,7 @@ from email.policy import default
 from odoo import models, fields
 from datetime import date
 
+
 from odoo.api import ValuesType, Self
 
 
@@ -33,12 +34,14 @@ class HospitalPatient(models.Model):
                               compute="status_date")
     image_1920 = fields.Binary("image")
 
+    # onchange method to autofill email
     # @api.onchange("patient_id")
     # def onchange_patient_name(self):
     #     for rec in self:
     #         print(rec)
     #         rec.email = rec.patient_id.email
 
+    # compute method
     # def compute_patient_email(self):
     #     for rec in self:
     #         rec.email = rec.patient_id.email
@@ -53,6 +56,7 @@ class HospitalPatient(models.Model):
         vals["company_id"] = self.env.user.company_id.id
         vals["name"] = self.env['ir.sequence'].next_by_code('hospital.patient')
         return super(HospitalPatient, self).create(vals)
+
 
     # def compute_name(self):
     #     for rec in self:
@@ -72,7 +76,7 @@ class HospitalPatient(models.Model):
        self.env["hospital.patient"].create(vals)
        
        """
-
+    # email template
     def send_email(self):
         for rec in self:
             template = self.env.ref("hospital_management.mail_template_patient_confirm")

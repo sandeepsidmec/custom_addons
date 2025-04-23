@@ -22,9 +22,7 @@
                             <field name="name" readonly="1"/>
                         </h1>
                     </div>
-                    <field name="image_1920" widget="image" class="oe_avatar"
-                           options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
-
+                    <field name="image_1920" widget="image" class="oe_avatar"/>
                     <group>
                         <group>
                             <field name="patient_id"/>

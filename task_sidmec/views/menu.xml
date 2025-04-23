@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="menu_tasks" name="CMS"/>
+    <menuitem id="menu_tasks_customer" name="customer" action="action_task_customer" parent="menu_tasks"/>
+    <menuitem id="menu_tasks_invoice" name="Invoices" action="action_my_customer_invoices" parent="menu_tasks_customer"/>
+    <menuitem id="menu_tasks_credit_note" name="Credit Notes" action="action_my_customer_credit_note" parent="menu_tasks_customer"/>
+    <menuitem id="shipment_menu_root" name="Shipment" parent="menu_tasks"/>
+    <menuitem id="shipment_menu_docs" name="Documents" action="action_shipment_document" parent="shipment_menu_root"/>
+    <menuitem id="menu_customer_followup_root1" name="Customer Follow-up" parent="menu_tasks"/>
+    <menuitem id="menu_customer_followup_root" name="Customer Follow-up" action="action_customer_followup" parent="menu_customer_followup_root1"/>
+    <menuitem id="menu_reporting" name="Reporting" parent="menu_tasks"/>
+     <menuitem id="menu_customer_report" name="Customer pdf Report" parent="menu_reporting" action="action_hospital_customer_wizard"/>
+</odoo>
