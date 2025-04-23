@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="report_customer_pdf" model="ir.actions.report">
+        <field name="name">customer pdf report</field>
+        <field name="model">task.customer</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">task_sidmec.report_customer_report_document</field>
+        <field name="report_file">task_sidmec.report_customer_report_document</field>
+        <!--        <field name="paperformat_id" ref="hr.paperformat_hr_employee_badge"/>-->
+        <field name="print_report_name">(object.email)</field>
+        <field name="binding_model_id" ref="model_task_customer"/>
+        <field name="binding_type">report</field>
+    </record>
+
+     <record id="report_customer_xlsx" model="ir.actions.report">
+        <field name="name">customer excel report</field>
+        <field name="model">task.customer</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">task_sidmec.report_customer_report_xlsx</field>
+        <field name="report_file">task_sidmec.report_customer_report_xlsx</field>
+        <!--        <field name="paperformat_id" ref="hr.paperformat_hr_employee_badge"/>-->
+        <field name="binding_model_id" ref="model_task_customer"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

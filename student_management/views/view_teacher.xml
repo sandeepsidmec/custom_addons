@@ -31,8 +31,8 @@
                 <field name="name"/>
                 <field name="age"/>
                 <field name="experience"/>
-                <field name="gender"/>
-                <field name="subject"/>
+                <field name="gender" optional="hide"/>
+                <field name="subject" optional="hide"/>
             </list>
         </field>
     </record>
