@@ -8,7 +8,6 @@
                 <group string="customer report">
                     <group>
                         <field name="customer_id"/>
-                        <field name="age"/>
                     </group>
                     <group>
                         <field name="email"/>

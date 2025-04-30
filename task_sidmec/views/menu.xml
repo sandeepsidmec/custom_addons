@@ -10,4 +10,5 @@
     <menuitem id="menu_customer_followup_root" name="Customer Follow-up" action="action_customer_followup" parent="menu_customer_followup_root1"/>
     <menuitem id="menu_reporting" name="Reporting" parent="menu_tasks"/>
      <menuitem id="menu_customer_report" name="Customer pdf Report" parent="menu_reporting" action="action_hospital_customer_wizard"/>
+     <menuitem id="menu_sales_report" name="Sales pdf Report" parent="sale.menu_sale_report" action="action_sale_order_wizard"/>
 </odoo>

@@ -22,6 +22,7 @@ class HospitalAppointment(models.Model):
     is_patient_in_ward = fields.Boolean("is patient in ward")
     admit_date = fields.Date("Admit date")
     discharge_date = fields.Date("discharge Date")
+    date = fields.Date("Appointment Date")
     doctor_names = fields.Many2many(comodel_name="hospital.doctor", string="Doctors")
     doctor_name = fields.Many2one(comodel_name="hospital.doctor", string="Doctor")
     date = fields.Date("Date")
@@ -30,15 +31,40 @@ class HospitalAppointment(models.Model):
     user_id = fields.Many2one("res.users", "user")
     company_id = fields.Many2one("res.company", "Company")
 
-    status = fields.Selection([("admit", "Admitted"), ("discharge", "Discharged")], "status", default='admit',
+    status = fields.Selection([("draft", "Draft"), ("confirm", "Confirm")], "status", default='draft',
                               compute="status_date")
     image_1920 = fields.Binary("image")
+    appointment_lines = fields.One2many("hospital.appointment.line", "patient", "lines")
+
 
     def create(self, vals):
         vals["user_id"] = self.env.user.id
         vals["company_id"] = self.env.user.company_id.id
         # vals["name"] = self.env['ir.sequence'].next_by_code('hospital.appointment')
         return super(HospitalAppointment, self).create(vals)
+
+    def confirm_appointment(self):
+        for rec in self:
+            patient = self.env["hospital.patient"].search([('appointment_id', '=', rec.id)])
+            if patient:
+                raise ValueError("record existed")
+            else:
+                vals = {
+                    'patient_id': rec.patient_id.id,
+                    'email': rec.email,
+                    'age': rec.age,
+                    'date': rec.date,
+                    'patient_lines': [(0, 0, {
+                        'product_id': i.product_id.id,
+                        'qty': i.qty,
+                        'unit_price': i.unit_price,
+                        'total': i.sub_total,
+
+                    }) for i in rec.appointment_lines]
+
+                }
+            self.env["hospital.patient"].create(vals)
+            rec.status = "confirm"
 
     """
     
@@ -65,8 +91,8 @@ class HospitalAppointment(models.Model):
         return {
             'name': "view patient invoices",
             'view_mode': 'list',
-            'res_model': 'hospital.patient.line',
-            'domain': [('patient', '=', self.id)],
+            'res_model': 'hospital.patient',
+            # 'domain': [('patient', '=', self.id)],
             'type': 'ir.actions.act_window',
         }
 
@@ -74,13 +100,13 @@ class HospitalAppointment(models.Model):
         today = date.today()
         for i in self:
             if i.discharge_date and today > i.discharge_date:
-                i.status = 'discharge'
+                i.status = 'confirm'
             else:
-                i.status = 'admit'
+                i.status = 'draft'
 
     def Confirm(self):
         for record in self:
-            record.status = 'discharge'
+            record.status = 'confirm'
 
 
 class HospitalAppointmentLines(models.Model):
