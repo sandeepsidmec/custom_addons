@@ -22,4 +22,17 @@
         <field name="binding_model_id" ref="model_task_customer"/>
         <field name="binding_type">report</field>
     </record>
+
+     <record id="report_sale_pdf" model="ir.actions.report">
+        <field name="name">sale pdf report</field>
+        <field name="model">sales.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">task_sidmec.report_sale_report_document</field>
+        <field name="report_file">task_sidmec.report_sale_report_document</field>
+        <!--        <field name="paperformat_id" ref="hr.paperformat_hr_employee_badge"/>-->
+        <field name="print_report_name">(object.partner_id)</field>
+        <field name="binding_model_id" ref="model_sales_report_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
+
 </odoo>

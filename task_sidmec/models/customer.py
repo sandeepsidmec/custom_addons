@@ -71,11 +71,11 @@ class TaskCustomer(models.Model):
             i.phone = i.customer_id.phone
 
     # Task-4 @api.constrains to Validate Data on Save like age > 0
-    @api.constrains("age")
-    def check_age(self):
-        for i in self:
-            if i.age < 0:
-                raise ValidationError("Age must be greater than 0")
+    # @api.constrains("age")
+    # def check_age(self):
+    #     for i in self:
+    #         if i.age < 0:
+    #             raise ValidationError("Age must be greater than 0")
 
     # Task-5
 

@@ -8,7 +8,7 @@
                 <header>
                     <button name="send_email" string="Send mail" type="object" class="btn-primary"/>
                      <button name="Confirm" string="Confirm" type="object" class="btn-primary"/>
-                    <field name="status" widget="statusbar" statusbar_visible="admit,discharge"/>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,confirm"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -16,7 +16,7 @@
                                 name="view_patient_lines"
                                 type="object"
                                 icon="fa-pencil-square-o"
-                                string="patient"/>
+                                string="Invoices"/>
                     </div>
                     <div class="oe_title">
                         <h1>
@@ -31,11 +31,6 @@
                             <field name="age"/>
                             <field name="gender"/>
                         </group>
-                        <group>
-                            <field name="is_patient_in_ward"/>
-                            <field name="admit_date" invisible="is_patient_in_ward == False"/>
-                            <field name="discharge_date" invisible="is_patient_in_ward == False"/>
-                        </group>
                     </group>
                     <notebook>
                         <page string="Fee Structure">
@@ -48,10 +43,11 @@
 
                                 </list>
                                 <form>
-                                    <field name="product_id"/>
-                                    <field name="qty"/>
-                                    <field name="unit_price"/>
-                                    <field name="subtotal"/>
+                                   <group>
+                                        <field name="product_id" readonly="parent.status  != 'draft'"/>
+                                        <field name="unit_price" readonly="parent.status  != 'draft'"/>
+                                        <field name="subtotal" readonly="parent.status  != 'draft'"/>
+                                    </group>
                                 </form>
                             </field>
                         </page>
