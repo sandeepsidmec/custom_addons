@@ -31,8 +31,7 @@ class HospitalAppointment(models.Model):
     user_id = fields.Many2one("res.users", "user")
     company_id = fields.Many2one("res.company", "Company")
 
-    status = fields.Selection([("draft", "Draft"), ("confirm", "Confirm")], "status", default='draft',
-                              compute="status_date")
+    status = fields.Selection([("draft", "Draft"), ("confirm", "Confirm")], "status", default='draft')
     image_1920 = fields.Binary("image")
     appointment_lines = fields.One2many("hospital.appointment.line", "patient", "lines")
 
@@ -45,7 +44,7 @@ class HospitalAppointment(models.Model):
 
     def confirm_appointment(self):
         for rec in self:
-            patient = self.env["hospital.patient"].search([('appointment_id', '=', rec.id)])
+            patient = self.env["hospital.patient"].search([('patient_id', '=', rec.id)])
             if patient:
                 raise ValueError("record existed")
             else:
@@ -58,13 +57,13 @@ class HospitalAppointment(models.Model):
                         'product_id': i.product_id.id,
                         'qty': i.qty,
                         'unit_price': i.unit_price,
-                        'total': i.sub_total,
+                        'sub_total': i.sub_total,
 
                     }) for i in rec.appointment_lines]
 
                 }
             self.env["hospital.patient"].create(vals)
-            rec.status = "confirm"
+            rec.status = 'confirm'
 
     """
     
@@ -104,9 +103,9 @@ class HospitalAppointment(models.Model):
             else:
                 i.status = 'draft'
 
-    def Confirm(self):
-        for record in self:
-            record.status = 'confirm'
+    # def Confirm(self):
+    #     for record in self:
+    #         record.status = 'confirm'
 
 
 class HospitalAppointmentLines(models.Model):
@@ -115,9 +114,9 @@ class HospitalAppointmentLines(models.Model):
     product_id = fields.Many2one("product.product", "product Name")
     qty = fields.Integer("qty")
     unit_price = fields.Float("Unit price")
-    subtotal = fields.Float("sub-total", compute="compute_subtotal")
+    sub_total = fields.Float("sub-total", compute="compute_subtotal")
     patient = fields.Many2one("hospital.appointment", "patient")
 
     def compute_subtotal(self):
         for i in self:
-            i.subtotal = i.qty * i.unit_price
+            i.sub_total = i.qty * i.unit_price
