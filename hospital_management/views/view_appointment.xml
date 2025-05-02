@@ -7,7 +7,7 @@
             <form string="appointment">
                 <header>
                     <button name="send_email" string="Send mail" type="object" class="btn-primary"/>
-                     <button name="Confirm" string="Confirm" type="object" class="btn-primary"/>
+                     <button name="confirm_appointment" string="Confirm" type="object"/>
                     <field name="status" widget="statusbar" statusbar_visible="draft,confirm"/>
                 </header>
                 <sheet>
@@ -39,14 +39,14 @@
                                     <field name="product_id"/>
                                     <field name="qty"/>
                                     <field name="unit_price"/>
-                                    <field name="subtotal"/>
+                                    <field name="sub_total"/>
 
                                 </list>
                                 <form>
                                    <group>
-                                        <field name="product_id" readonly="parent.status  != 'draft'"/>
-                                        <field name="unit_price" readonly="parent.status  != 'draft'"/>
-                                        <field name="subtotal" readonly="parent.status  != 'draft'"/>
+                                        <field name="product_id"/>
+                                        <field name="unit_price"/>
+                                        <field name="sub_total"/>
                                     </group>
                                 </form>
                             </field>

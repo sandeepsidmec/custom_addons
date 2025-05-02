@@ -107,9 +107,9 @@ class HospitalPatientLines(models.Model):
     product_id = fields.Many2one("product.product", "product Name")
     qty = fields.Integer("qty")
     unit_price = fields.Float("Unit price")
-    subtotal = fields.Float("sub-total", compute="subtotal")
+    sub_total = fields.Float("sub-total", compute="subtotal")
     patient = fields.Many2one("hospital.patient", "patient")
 
     def subtotal(self):
         for i in self:
-            i.subtotal = i.qty * i.unit_price
+            i.sub_total = i.qty * i.unit_price
