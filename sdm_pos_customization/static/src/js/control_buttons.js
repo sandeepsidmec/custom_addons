@@ -20,3 +20,10 @@ patch(ControlButtons.prototype, {
         });
     },
 });
+
+
+//patch(ControlButtons.prototype, {
+//    onClickDialog() {
+//        alert("hiii");
+//    },
+//});

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+  <t t-name="sdm_pos_customization.Navbar" t-inherit="point_of_sale.Navbar" t-inherit-mode="extension">
+    <xpath expr="//DropdownItem" position="after">
+      <DropdownItem onSelected="() => this.CustomAction()">
+          Custom action
+      </DropdownItem>
+    </xpath>
+
+<!--      <xpath expr="//Dropdown//div[contains(@class, 'pos-burger-menu-items')]" position="inside">-->
+<!--            <DropdownItem>-->
+<!--                Lock-->
+<!--            </DropdownItem>-->
+<!--        </xpath>-->
+
+  </t>
+</templates>
