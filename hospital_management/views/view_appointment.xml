@@ -7,8 +7,11 @@
             <form string="appointment">
                 <header>
                     <button name="send_email" string="Send mail" type="object" class="btn-primary"/>
-                     <button name="confirm_appointment" string="Confirm" type="object"/>
-                    <field name="status" widget="statusbar" statusbar_visible="draft,confirm"/>
+                     <button name="confirm_appointment" string="Confirm" type="object" class="oe_highlight" invisible="status != 'draft'"/>
+                     <button name="ongoing_appointment" string="Ongoing" type="object" class="oe_highlight" invisible="status != 'confirm'"/>
+                     <button name="done_appointment" string="Done" type="object" class="oe_highlight" invisible="status != 'ongoing'"/>
+                     <button name="cancel_appointment" string="Cancel" type="object" invisible="status == 'done'"/>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,confirm,ongoing,done"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">

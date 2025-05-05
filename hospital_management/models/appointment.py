@@ -31,7 +31,7 @@ class HospitalAppointment(models.Model):
     user_id = fields.Many2one("res.users", "user")
     company_id = fields.Many2one("res.company", "Company")
 
-    status = fields.Selection([("draft", "Draft"), ("confirm", "Confirm")], "status", default='draft')
+    status = fields.Selection([("draft", "Draft"), ("confirm", "Confirm"), ("ongoing", "Ongoing"), ("done", "Done"), ("cancel", "Cancelled")], "status", default='draft')
     image_1920 = fields.Binary("image")
     appointment_lines = fields.One2many("hospital.appointment.line", "patient", "lines")
 
@@ -41,6 +41,19 @@ class HospitalAppointment(models.Model):
         vals["company_id"] = self.env.user.company_id.id
         # vals["name"] = self.env['ir.sequence'].next_by_code('hospital.appointment')
         return super(HospitalAppointment, self).create(vals)
+
+    def ongoing_appointment(self):
+        for rec in self:
+            rec.status ="ongoing"
+
+    def done_appointment(self):
+        for rec in self:
+            rec.status ="done"
+
+    def cancel_appointment(self):
+        for rec in self:
+            rec.status ="cancel"
+
 
     def confirm_appointment(self):
         for rec in self:
